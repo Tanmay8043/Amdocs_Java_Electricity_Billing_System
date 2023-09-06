@@ -79,13 +79,18 @@ public class ElectricityBillingSystem {
                     break;
 
                 case 2:
-                    System.out.print("Bill Generation\nPlease Enter Meter Id:");
+                    System.out.print("Bill Generation\nPlease Enter Meter Id: ");
                     int m = sc.nextInt();
                     if(customers.containsKey(m)){
                         System.out.print("Please Enter Units consumed for "+ customers.get(m).getName() + " : ");
-                        Bill billUser1 = new Bill(customers.get(m), sc.nextInt());
-                        billUser1.calculateBill();
-                        System.out.println("Bill Generated for "+ customers.get(m).getName() +": Rs." + billUser1.getBillAmount());
+                        int units = sc.nextInt();
+                        if(units >=0){
+                            Bill billUser1 = new Bill(customers.get(m), units);
+                            billUser1.calculateBill();
+                            System.out.println("Bill Generated for "+ customers.get(m).getName() +": Rs." + billUser1.getBillAmount());
+                        }else{
+                            System.out.print("Please enter valid units.");
+                        }
                     }else{
                         System.out.println("No Records Found for meter id = " + m);
                     }
